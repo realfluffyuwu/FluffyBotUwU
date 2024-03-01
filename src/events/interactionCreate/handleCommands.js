@@ -1,7 +1,5 @@
 const getCommands = require("../../utils/getCommands");
 
-// Handle Time Stamps
-
 // get the current day of the week
 const daysOfWeek = [
     'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
