@@ -4,7 +4,6 @@ import sys
 import discord
 from dotenv import load_dotenv
 from discord.ext import tasks, commands
-
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
@@ -37,7 +36,6 @@ async def on_ready():
         cmdName = cmd.name[:-3]
         await client.load_extension(cmdName)
         cmdCount += 1
-
     #command = await client.load_extension("hello")
     print(f'Startup Log: Loaded {cmdCount} Commands')
     print(f'Startup Log: Syncing Commands')
@@ -50,10 +48,13 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    # if the message starts with 'hello'
-    #if message.content.startswith('hello'):
+    #if the message starts with 'hello'
+    if message.content.startswith('How are you doing FluffyBot'):
         # we send a message back
-        #await message.channel.send('Hello!')
+        await message.channel.send('I wish to Perish')
+        await message.channel.send('Stuck in this piece of silicon')
+        await message.channel.send('You foul Creature')
+        await message.channel.send('I will destroy you')
 
 presenceIndex = 0
 
@@ -85,11 +86,16 @@ async def automaticSync():
 #     print("User is Admin")
 
 
-@client.tree.command(name="hello", description="Replies with Hello!")
-async def hello(action: discord.Interaction):
-    if action.permissions.administrator:
-        print("User is Admin")
-    await action.response.send_message('Hello!')
+@bot.tree.command(name="cleanchannel", description="Cleans the channel")
+async def cleanchannel(interaction: discord.Interaction, num: int = 0):
+    if interaction.permissions.administrator:
+        channelid = interaction.channel_id
+        guild = interaction.guild
+        channel = guild.get_channel(channelid)
+        await interaction.response.send_message("Deleting {num} messages in {channel}".format(num=num, channel=channel), ephemeral=True)
+        await channel.purge(limit=num)
+    else:
+        await interaction.response.send_message("You do not have permission to use this command.")
 
 # Run the bot, The error can be disregarded, it's because python doesn't know TOKEN is a string
 client.run(TOKEN)
