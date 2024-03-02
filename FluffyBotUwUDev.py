@@ -22,10 +22,13 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    # if the message belongs to the Bot itself we ignore it.
     if message.author == client.user:
         return
 
-    if message.content.startswith('hello fluffybot'):
+    # if the message starts with 'hello'
+    if message.content.startswith('hello'):
+        # we send a message back
         await message.channel.send('Hello!')
 
 # Run the bot, The error can be disregarded, it's because python doesn't know TOKEN is a string
