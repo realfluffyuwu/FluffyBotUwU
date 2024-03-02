@@ -18,6 +18,7 @@ intents.message_content = True
 client = commands.Bot(command_prefix='/', intents=intents)
 #tree = discord.app_commands.CommandTree(client)
 
+bot = client
 
 @client.event
 async def on_ready():
@@ -29,8 +30,18 @@ async def on_ready():
     
     print("Startup Log: Starting Presence Loop")
     updatePresence.start()
+    
+    print("Startup Log: Importing Commands")
+    cmdCount = 0
+    for cmd in command_dir.glob('*.py'):
+        cmdName = cmd.name[:-3]
+        await client.load_extension(cmdName)
+        cmdCount += 1
 
-    #synced = await client.tree.sync()
+    #command = await client.load_extension("hello")
+    print(f'Startup Log: Loaded {cmdCount} Commands')
+    print(f'Startup Log: Syncing Commands')
+    synced = await client.tree.sync()
     print(f'Startup Log: Complete')
 
 @client.event
