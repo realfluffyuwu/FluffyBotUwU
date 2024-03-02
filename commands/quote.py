@@ -317,7 +317,7 @@ quotes = [
 async def quote(action):
     quoteI = random.randrange(0, len(quotes) - 1)
     quote = quotes[quoteI]
-    await action.send(f"{quote[1]} - *{quote[0]}*, Quote {quoteI}/{len(quotes)}");
+    await action.send(f"\"{quote[1]}\" - *{quote[0]}*, Quote {quoteI}/{len(quotes)}");
 
 async def setup(client):
     client.add_command(quote)
