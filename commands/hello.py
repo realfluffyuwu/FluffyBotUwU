@@ -13,6 +13,5 @@ async def hellotest(ctx):
 
 
 async def setup(client):
-    print("WAAAAH")
     client.add_command(hellotest)
 
