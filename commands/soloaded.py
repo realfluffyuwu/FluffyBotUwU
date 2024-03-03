@@ -1,3 +1,12 @@
+import discord
+import random
+from discord.ext import commands
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = commands.Bot(command_prefix='/', intents=intents)
+
 randomWords = [
     "Empty Cans of Pepsi",
     "Used toothbrushes",
@@ -98,31 +107,22 @@ randomWords = [
     "Happy Meal Toys",
 ]
 
-import random
-import discord
-from discord.ext import commands
+class soloaded(commands.Cog):
+    def __init__(self, client):
+        self.client = client
 
-intents = discord.Intents.default()
-intents.message_content = True
+    @discord.app_commands.command(name="soloaded", description="He was so Loaded!")
+    async def soloaded(self, ctx: discord.Interaction):
 
-client = commands.Bot(command_prefix='/', intents=intents)
+        randomE1 = randomWords[random.randrange(0, len(randomWords) - 1)]
+        randomE2 = randomWords[random.randrange(0, len(randomWords) - 1)]
+        randomE3 = randomWords[random.randrange(0, len(randomWords) - 1)]
 
+        ranNum1 = max(round(random.random() * 15), 2)
+        ranNum2 = max(round(random.random() * 15), 2)
+        ranNum3 = max(round(random.random() * 15), 2)
 
-@commands.hybrid_command(name="soloaded", description="He was so Loaded!")
-async def soloaded(ctx):
-
-
-    randomE1 = randomWords[random.randrange(0, len(randomWords) - 1)]
-    randomE2 = randomWords[random.randrange(0, len(randomWords) - 1)]
-    randomE3 = randomWords[random.randrange(0, len(randomWords) - 1)]
-
-    ranNum1 = max(round(random.random() * 15), 2)
-    ranNum2 = max(round(random.random() * 15), 2)
-    ranNum3 = max(round(random.random() * 15), 2)
-
-    await ctx.send(f'He was so Loaded! They had {ranNum1} {randomE1}, {ranNum2} {randomE2} and {ranNum3} {randomE3}.')
-
+        await ctx.response.send_message(f'He was so Loaded! They had {ranNum1} {randomE1}, {ranNum2} {randomE2} and {ranNum3} {randomE3}.')
 
 async def setup(client):
-    client.add_command(soloaded)
-
+    await client.add_cog(soloaded(client))

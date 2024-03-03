@@ -1,6 +1,5 @@
 import pathlib
 import os
-import sys
 import discord
 from dotenv import load_dotenv
 from discord.ext import tasks, commands
@@ -9,18 +8,17 @@ TOKEN = os.getenv('TOKEN')
 
 root_dir = pathlib.Path(__file__).parent
 command_dir = root_dir / 'commands'
-sys.path.append(str(command_dir))
+#sovicImages_dir = root_dir / 'assets/sovicImages'
 
 intents = discord.Intents.default()
 intents.message_content = True
 
 client = commands.Bot(command_prefix='/', intents=intents)
-#tree = discord.app_commands.CommandTree(client)
-
-bot = client
 
 @client.event
 async def on_ready():
+    print(root_dir)
+    print(command_dir)
     print(f'Startup Log: We have logged in as {client.user}')
     print(f'Startup Log: Listing Servers that {client.user} is Apart of\n')
     for guild in client.guilds:
@@ -34,27 +32,19 @@ async def on_ready():
     cmdCount = 0
     for cmd in command_dir.glob('*.py'):
         cmdName = cmd.name[:-3]
-        await client.load_extension(cmdName)
+        print('commands.{cmdName}'.format(cmdName=cmdName))
+        await client.load_extension('commands.{cmdName}'.format(cmdName=cmdName))
         cmdCount += 1
-    #command = await client.load_extension("hello")
     print(f'Startup Log: Loaded {cmdCount} Commands')
     print(f'Startup Log: Syncing Commands')
     synced = await client.tree.sync()
     print(f'Startup Log: Complete')
 
-@client.event
-async def on_message(message):
-    # if the message belongs to the Bot itself we ignore it.
-    if message.author == client.user:
-        return
 
-    #if the message starts with 'hello'
-    if message.content.startswith('How are you doing FluffyBot'):
-        # we send a message back
-        await message.channel.send('I wish to Perish')
-        await message.channel.send('Stuck in this piece of silicon')
-        await message.channel.send('You foul Creature')
-        await message.channel.send('I will destroy you')
+# Main message event handler
+@client.event
+async def on_message(message: discord.message.Message):
+    pass   
 
 presenceIndex = 0
 
@@ -85,17 +75,5 @@ async def automaticSync():
 # if action.permissions.administrator:
 #     print("User is Admin")
 
-
-@bot.tree.command(name="cleanchannel", description="Cleans the channel")
-async def cleanchannel(interaction: discord.Interaction, num: int = 0):
-    if interaction.permissions.administrator:
-        channelid = interaction.channel_id
-        guild = interaction.guild
-        channel = guild.get_channel(channelid)
-        await interaction.response.send_message("Deleting {num} messages in {channel}".format(num=num, channel=channel), ephemeral=True)
-        await channel.purge(limit=num)
-    else:
-        await interaction.response.send_message("You do not have permission to use this command.")
-
-# Run the bot, The error can be disregarded, it's because python doesn't know TOKEN is a string
-client.run(TOKEN)
+# Run the client, The error can be disregarded, it's because python doesn't know TOKEN is a string
+client.run(str(TOKEN))

@@ -7,9 +7,6 @@ intents.message_content = True
 
 client = commands.Bot(command_prefix='/', intents=intents)
 
-
-
-
 quotes = [
     [
         "Unknown",
@@ -312,13 +309,18 @@ quotes = [
     ],
 ]
 
-# Picks a random quote from the list above and sends it
-@commands.hybrid_command(name="quote", description="Sends a random quote")
-async def quote(action):
-    quoteI = random.randrange(0, len(quotes) - 1)
-    quote = quotes[quoteI]
-    await action.send(f"\"{quote[1]}\" - *{quote[0]}*, Quote {quoteI}/{len(quotes)}");
+
+class quote(commands.Cog):
+    def __init__(self, client):
+        self.client = client
+
+    # Picks a random quote from the list above and sends it
+    @discord.app_commands.command(name="quote", description="Replies with a Random Quote")
+    async def quote(self, ctx: discord.Interaction):
+        quoteI = random.randrange(0, len(quotes) - 1)
+        quote = quotes[quoteI]
+        await ctx.response.send_message(f"\"{quote[1]}\" - *{quote[0]}*, Quote {quoteI}/{len(quotes)}");
 
 async def setup(client):
-    client.add_command(quote)
+    await client.add_cog(quote(client))
 
