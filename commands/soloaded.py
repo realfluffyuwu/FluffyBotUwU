@@ -1,4 +1,13 @@
-var randomWords = [
+import discord
+import random
+from discord.ext import commands
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = commands.Bot(command_prefix='/', intents=intents)
+
+randomWords = [
     "Empty Cans of Pepsi",
     "Used toothbrushes",
     "Used tampons",
@@ -98,28 +107,22 @@ var randomWords = [
     "Happy Meal Toys",
 ]
 
-module.exports = {
-    name: 'he-was-so-loaded',
-    description: 'He was So Loaded!',
-    needsAdmin: false,
+class soloaded(commands.Cog):
+    def __init__(self, client):
+        self.client = client
 
-    callback: (client, interaction) => {
-        
-        var randomElement1 = randomWords[Math.floor(Math.random() * randomWords.length)]
-        var randomElement2 = randomWords[Math.floor(Math.random() * randomWords.length)]
-        var randomElement3 = randomWords[Math.floor(Math.random() * randomWords.length)]
+    @discord.app_commands.command(name="soloaded", description="He was so Loaded!")
+    async def soloaded(self, ctx: discord.Interaction):
 
-        var ranNum1 = Math.max(Math.round(Math.random()*15), 2)
-        var ranNum2 = Math.max(Math.round(Math.random()*15), 2)
-        var ranNum3 = Math.max(Math.round(Math.random()*15), 2)
+        randomE1 = randomWords[random.randrange(0, len(randomWords) - 1)]
+        randomE2 = randomWords[random.randrange(0, len(randomWords) - 1)]
+        randomE3 = randomWords[random.randrange(0, len(randomWords) - 1)]
 
-        interaction.reply(`He was so Loaded! They had ${ranNum1} ${randomElement1}, ${ranNum2} ${randomElement2} and ${ranNum3} ${randomElement3}.`);
-        setTimeout(() => {
-            try {
-                interaction.deleteReply()
-            } catch (error) {
-                console.log(`${error}`)
-            }
-        }, ((5 * 60) * 1000));
-    }
-}
+        ranNum1 = max(round(random.random() * 15), 2)
+        ranNum2 = max(round(random.random() * 15), 2)
+        ranNum3 = max(round(random.random() * 15), 2)
+
+        await ctx.response.send_message(f'He was so Loaded! They had {ranNum1} {randomE1}, {ranNum2} {randomE2} and {ranNum3} {randomE3}.')
+
+async def setup(client):
+    await client.add_cog(soloaded(client))
