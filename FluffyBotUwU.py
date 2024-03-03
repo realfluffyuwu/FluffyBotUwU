@@ -32,10 +32,9 @@ async def on_ready():
     cmdCount = 0
     for cmd in command_dir.glob('*.py'):
         cmdName = cmd.name[:-3]
-        print('commands.{cmdName}'.format(cmdName=cmdName))
         await client.load_extension('commands.{cmdName}'.format(cmdName=cmdName))
         cmdCount += 1
-    print(f'Startup Log: Loaded {cmdCount} Commands')
+    print(f'Startup Log: Loaded {cmdCount} Command Bundles')
     print(f'Startup Log: Syncing Commands')
     synced = await client.tree.sync()
     print(f'Startup Log: Complete')
