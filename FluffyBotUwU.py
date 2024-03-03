@@ -16,17 +16,17 @@ client = commands.Bot(command_prefix='/', intents=intents)
 
 @client.event
 async def on_ready():
-    print(root_dir)
-    print(command_dir)
     print(f'Startup Log: We have logged in as {client.user}')
     print(f'Startup Log: Listing Servers that {client.user} is Apart of\n')
     for guild in client.guilds:
         print(f'Name: {guild.name} ID: {guild.id}')
     print(f'\nStartup Log: I am running in a total of {len(client.guilds)} Servers')
     
-    print("Startup Log: Starting Presence Loop")
+    print("Startup Log: Starting Presence Task")
     updatePresence.start()
-    
+    print("Startup Log: Starting Automatic Sync Task")
+    automaticSync.start()
+
     print("Startup Log: Importing Commands")
     cmdCount = 0
     for cmd in command_dir.glob('*.py'):
@@ -35,7 +35,6 @@ async def on_ready():
         cmdCount += 1
     print(f'Startup Log: Loaded {cmdCount} Command Bundles')
     print(f'Startup Log: Syncing Commands')
-    synced = await client.tree.sync()
     print(f'Startup Log: Complete')
 
 
@@ -45,11 +44,13 @@ presenceIndex = 0
 @tasks.loop(seconds = 10)
 async def updatePresence():
     presenceMessages = [
-    	"Fuck Javascript",
+    	"in {n} Servers".format(n=len(client.guilds)),
+        "Fuck Javascript",
     	"Fluffy is Cool",
     	"Broken Hand",
     	"Windows Slave Name",
     	"UwU",
+    	"in {n} Servers".format(n=len(client.guilds)),
     	"Fibbin",
     	"Arch user BTW",
     	"Desk Puncher"
