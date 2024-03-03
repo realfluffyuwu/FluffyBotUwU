@@ -18,6 +18,15 @@ class smallcommands(commands.Cog):
     async def ping(self, ctx: discord.Interaction):
         await ctx.response.send_message("Pong!")
 
+    @discord.app_commands.command(name="sync", description="Syncs Commands")
+    async def sync(self, ctx: discord.Interaction):
+        if ctx.permissions.administrator:
+            self.client.tree.clear_commands(guild=ctx.guild)
+            await self.client.tree.sync(guild=ctx.guild)
+            await ctx.response.send_message("Synced Commands", ephemeral=True)
+        else:
+            await ctx.response.send_message("You do not have permission to use this command.", ephemeral=True)
+
 async def setup(client):
     await client.add_cog(smallcommands(client))
 
