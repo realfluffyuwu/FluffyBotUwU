@@ -45,7 +45,8 @@ presenceIndex = 0
 @tasks.loop(seconds = 10)
 async def updatePresence():
     presenceMessages = [
-    	"Fuck Javascript",
+    	"in {n} Servers".format(n=len(client.guilds)),
+        "Fuck Javascript",
     	"Fluffy is Cool",
     	"Broken Hand",
     	"Windows Slave Name",
