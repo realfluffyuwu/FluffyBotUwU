@@ -8,7 +8,6 @@ TOKEN = os.getenv('TOKEN')
 
 root_dir = pathlib.Path(__file__).parent
 command_dir = root_dir / 'commands'
-#sovicImages_dir = root_dir / 'assets/sovicImages'
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -32,22 +31,17 @@ async def on_ready():
     cmdCount = 0
     for cmd in command_dir.glob('*.py'):
         cmdName = cmd.name[:-3]
-        print('commands.{cmdName}'.format(cmdName=cmdName))
         await client.load_extension('commands.{cmdName}'.format(cmdName=cmdName))
         cmdCount += 1
-    print(f'Startup Log: Loaded {cmdCount} Commands')
+    print(f'Startup Log: Loaded {cmdCount} Command Bundles')
     print(f'Startup Log: Syncing Commands')
     synced = await client.tree.sync()
     print(f'Startup Log: Complete')
 
 
-# Main message event handler
-@client.event
-async def on_message(message: discord.message.Message):
-    pass   
-
+# Index for Presence
 presenceIndex = 0
-
+# Update Presence every 10 seconds
 @tasks.loop(seconds = 10)
 async def updatePresence():
     presenceMessages = [
@@ -67,7 +61,7 @@ async def updatePresence():
     await client.change_presence(activity = discord.Game(presenceMessages[presenceIndex]))
     presenceIndex += 1
 
-@tasks.loop(minutes = 1)
+@tasks.loop(minutes = 30)
 async def automaticSync():
     await client.tree.sync()
 

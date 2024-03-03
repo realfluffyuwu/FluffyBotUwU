@@ -13,12 +13,11 @@ class cleanchannel(commands.Cog):
     @discord.app_commands.command(name="cleanchannel", description="Cleans the channel")
     async def cleanchannel(self, ctx: discord.Interaction, num: int = 0):
 
+        
         if ctx.permissions.administrator:
-            channelid = ctx.channel_id
-            guild = ctx.guild
-            channel = guild.get_channel(channelid)
-            await ctx.response.send_message("Deleting {num} messages in {channel}".format(num=num, channel=channel), ephemeral=True)
-            await channel.purge(limit=num)
+            await ctx.response.send_message("Deleting {num} messages in {channel}".format(num=num, channel=ctx.channel), ephemeral=True)
+            async for message in ctx.channel.history(limit=num):
+                await message.delete()
         else:
             await ctx.response.send_message("You do not have permission to use this command.")
 
