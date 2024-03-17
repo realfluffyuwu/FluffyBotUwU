@@ -9,7 +9,7 @@ intents.message_content = True
 
 client = commands.Bot(command_prefix='/', intents=intents)
 
-class fluffy(commands.Cog):
+class mitch(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -21,9 +21,9 @@ class fluffy(commands.Cog):
         # To lower the whole message
         ctx.content = ctx.content.lower()
 
-        if ctx.content.find('fluffy') != -1:
-            await ctx.reply(file=discord.File('{root_dir}/../assets/fluffy.png'.format(root_dir=root_dir)))
+        if ctx.content.find('mitch') != -1:
+            await ctx.reply(file=discord.File('{root_dir}/../assets/mitch.png'.format(root_dir=root_dir)))
 
 
 async def setup(client):
-    await client.add_cog(fluffy(client))
+    await client.add_cog(mitch(client))
