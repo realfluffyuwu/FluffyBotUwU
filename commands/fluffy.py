@@ -22,7 +22,7 @@ class fluffy(commands.Cog):
         ctx.content = ctx.content.lower()
 
         if ctx.content.find('fluffy') != -1:
-            await ctx.reply(file=discord.File('{root_dir}/../assets/fluffy.gif'.format(root_dir=root_dir)))
+            await ctx.reply(file=discord.File('{root_dir}/../assets/fluffy.png'.format(root_dir=root_dir)))
 
 
 async def setup(client):
