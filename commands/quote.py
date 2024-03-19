@@ -319,6 +319,7 @@ class quote(commands.Cog):
     async def quote(self, ctx: discord.Interaction):
         quoteI = random.randrange(0, len(quotes) - 1)
         quote = quotes[quoteI]
+        print("'{user}' executed '{command}'".format(user=ctx.user, command=self.quote.qualified_name))
         await ctx.response.send_message(f"\"{quote[1]}\" - *{quote[0]}*, Quote {quoteI}/{len(quotes)}");
 
 async def setup(client):

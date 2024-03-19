@@ -122,6 +122,7 @@ class soloaded(commands.Cog):
         ranNum2 = max(round(random.random() * 15), 2)
         ranNum3 = max(round(random.random() * 15), 2)
 
+        print("'{user}' executed '{command}'".format(user=ctx.user, command=self.soloaded.qualified_name))
         await ctx.response.send_message(f'He was so Loaded! They had {ranNum1} {randomE1}, {ranNum2} {randomE2} and {ranNum3} {randomE3}.')
 
 async def setup(client):
