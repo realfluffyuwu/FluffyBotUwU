@@ -46,6 +46,7 @@ async def updatePresence():
     presenceMessages = [
     	"in {n} Servers".format(n=len(client.guilds)),
         "Fuck Javascript",
+        "Sweeping Patio",
     	"Fluffy is Cool",
     	"Broken Hand",
     	"Windows Slave Name",
