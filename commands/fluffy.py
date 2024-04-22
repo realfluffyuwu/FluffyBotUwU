@@ -17,9 +17,8 @@ class fluffy(commands.Cog):
     @discord.app_commands.command(name="fluffy", description="Replies with a Fluffy Copypasta created by Mitch")
     async def fluffycommand(self, ctx: discord.Interaction):
 
-        if ctx.permissions.administrator:
-            await ctx.response.send_message("some say he has managed to drag his RGB computer setup into one of the drains beneath the city, hes got a long ass extension cable running up to the ladder across the street to a nearby 711. the two owners were furious to begin with but he offered a blow and go and after a brief discussion of who would get the blow and go, the two men agreed. After the two men gave fluffy a blowjob (they were indian and confused by the request), fluffy made his way to the sewers where to this day he sits on his computer pondering the mysteries of linux")
-            print("'{user}' executed '{command}'".format(user=ctx.user, command=self.fluffycommand.qualified_name))
+        await ctx.response.send_message("some say he has managed to drag his RGB computer setup into one of the drains beneath the city, hes got a long ass extension cable running up to the ladder across the street to a nearby 711. the two owners were furious to begin with but he offered a blow and go and after a brief discussion of who would get the blow and go, the two men agreed. After the two men gave fluffy a blowjob (they were indian and confused by the request), fluffy made his way to the sewers where to this day he sits on his computer pondering the mysteries of linux")
+        print("'{user}' executed '{command}'".format(user=ctx.user, command=self.fluffycommand.qualified_name))
 
     @commands.Cog.listener()
     async def on_message(self, ctx: discord.message.Message):
