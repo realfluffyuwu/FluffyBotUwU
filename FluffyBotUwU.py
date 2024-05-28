@@ -45,6 +45,7 @@ presenceIndex = 0
 async def updatePresence():
     presenceMessages = [
     	"in {n} Servers".format(n=len(client.guilds)),
+        "Forced to a Wedding",
         "Fuck Javascript",
         "Sweeping Patio",
     	"Fluffy is Cool",
