@@ -52,7 +52,8 @@ class names(commands.Cog):
 
         # Quin
         if ctx.content.find('quin') != -1:
-            await ctx.reply(file=discord.File('{regularImages_dir}/quin.png'.format(regularImages_dir=regularImages_dir)))
+            quinnumber = random.randrange(0, 1)
+            await ctx.reply(file=discord.File('{regularImages_dir}/quin{quinnumber}.png'.format(regularImages_dir=regularImages_dir,quinnumber=quinnumber)))
         
         # Sovic Images
         for alias in sovicAlias:
