@@ -1,19 +1,29 @@
+import os
 import discord
 import pathlib
+import random
 from discord.ext import commands
 
 root_dir = pathlib.Path(__file__).parent
+
+# Specific Folder for Sovics Images
+sovicImages_dir = root_dir / '../assets/sovicImages'
+sovicAlias = ['sovic', 'hunter', 'habibi']
+
+# All the Images for everyone else are here
+regularImages_dir = root_dir / '../assets'
 
 intents = discord.Intents.default()
 intents.message_content = True
 
 client = commands.Bot(command_prefix='/', intents=intents)
 
-class fluffy(commands.Cog):
+class names(commands.Cog):
     def __init__(self, client):
         self.client = client
 
     
+    # Slash Command for the Fluffy Copypasta
     @discord.app_commands.command(name="fluffy", description="Replies with a Fluffy Copypasta created by Mitch")
     async def fluffycommand(self, ctx: discord.Interaction):
 
@@ -28,9 +38,30 @@ class fluffy(commands.Cog):
         # To lower the whole message
         ctx.content = ctx.content.lower()
 
+        # Fluffy
         if ctx.content.find('fluffy') != -1:
-            await ctx.reply(file=discord.File('{root_dir}/../assets/fluffy.png'.format(root_dir=root_dir)))
+            await ctx.reply(file=discord.File('{regularImages_dir}/fluffy.png'.format(root_dir=root_dir)))
 
+        # Jordan
+        if ctx.content.find('jordan') != -1:
+            await ctx.reply(file=discord.File('{regularImages_dir}/jordan.png'.format(root_dir=root_dir)))
+
+        # Mitch
+        if ctx.content.find('mitch') != -1:
+            await ctx.reply(file=discord.File('{regularImages_dir}/mitch.png'.format(root_dir=root_dir)))
+
+        # Quin
+        if ctx.content.find('quin') != -1:
+            await ctx.reply(file=discord.File('{regularImages_dir}/quin.png'.format(root_dir=root_dir)))
+        
+        # Sovic Images
+        for alias in sovicAlias:
+            if ctx.content.find(alias) != -1:
+                images = os.listdir(sovicImages_dir)
+                
+                randomImg = random.choice(images)
+
+                await ctx.reply(file=discord.File('{sovicImages_dir}/{img}'.format(sovicImages_dir=sovicImages_dir, img=randomImg)))
 
 async def setup(client):
-    await client.add_cog(fluffy(client))
+    await client.add_cog(names(client))
