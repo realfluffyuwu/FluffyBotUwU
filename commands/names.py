@@ -40,19 +40,19 @@ class names(commands.Cog):
 
         # Fluffy
         if ctx.content.find('fluffy') != -1:
-            await ctx.reply(file=discord.File('{regularImages_dir}/fluffy.png'.format(root_dir=root_dir)))
+            await ctx.reply(file=discord.File('{regularImages_dir}/fluffy.png'.format(regularImages_dir=regularImages_dir)))
 
         # Jordan
         if ctx.content.find('jordan') != -1:
-            await ctx.reply(file=discord.File('{regularImages_dir}/jordan.png'.format(root_dir=root_dir)))
+            await ctx.reply(file=discord.File('{regularImages_dir}/jordan.png'.format(regularImages_dir=regularImages_dir)))
 
         # Mitch
         if ctx.content.find('mitch') != -1:
-            await ctx.reply(file=discord.File('{regularImages_dir}/mitch.png'.format(root_dir=root_dir)))
+            await ctx.reply(file=discord.File('{regularImages_dir}/mitch.png'.format(regularImages_dir=regularImages_dir)))
 
         # Quin
         if ctx.content.find('quin') != -1:
-            await ctx.reply(file=discord.File('{regularImages_dir}/quin.png'.format(root_dir=root_dir)))
+            await ctx.reply(file=discord.File('{regularImages_dir}/quin.png'.format(regularImages_dir=regularImages_dir)))
         
         # Sovic Images
         for alias in sovicAlias:
