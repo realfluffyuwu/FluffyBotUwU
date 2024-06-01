@@ -20,6 +20,11 @@ class smallcommands(commands.Cog):
         print("'{user}' executed '{command}'".format(user=ctx.user, command=self.ping.qualified_name))
         await ctx.response.send_message("Pong!")
 
+    @discord.app_commands.command(name="marco", description="Replies with Polo!")
+    async def marco(self, ctx: discord.Interaction):
+        print("'{user}' executed '{command}'".format(user=ctx.user, command=self.ping.qualified_name))
+        await ctx.response.send_message("Polo!")
+    
     @discord.app_commands.command(name="sync", description="Syncs Commands")
     async def sync(self, ctx: discord.Interaction):
         if ctx.permissions.administrator:
