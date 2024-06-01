@@ -12,7 +12,7 @@ class smallcommands(commands.Cog):
 
     @discord.app_commands.command(name="hello", description="Says hello!")
     async def hello(self, ctx: discord.Interaction):
-        print("'{user}' executed '{command}'".format(user=ctx.user, command=self.ping.qualified_name))
+        print("'{user}' executed '{command}'".format(user=ctx.user, command=self.hello.qualified_name))
         await ctx.response.send_message("Hello!")
 
     @discord.app_commands.command(name="ping", description="Replies with Pong!")
