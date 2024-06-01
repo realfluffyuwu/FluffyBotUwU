@@ -22,7 +22,7 @@ class smallcommands(commands.Cog):
 
     @discord.app_commands.command(name="marco", description="Replies with Polo!")
     async def marco(self, ctx: discord.Interaction):
-        print("'{user}' executed '{command}'".format(user=ctx.user, command=self.ping.qualified_name))
+        print("'{user}' executed '{command}'".format(user=ctx.user, command=self.marco.qualified_name))
         await ctx.response.send_message("Polo!")
     
     @discord.app_commands.command(name="sync", description="Syncs Commands")
