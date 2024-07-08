@@ -7,14 +7,10 @@ from discord.ext import commands
 root_dir = pathlib.Path(__file__).parent
 
 # File that has all the Channel ID's to avoid reading from
-channels = root_dir / '../.avoidChannels'
-print(channels)
 avoidChannels = []
-with open(channels, 'r') as f:
+with open(root_dir / '../.avoidChannels', 'r') as f:
     for line in f:
         avoidChannels.append(line.strip())
-
-print(avoidChannels)
 
 # Specific Folder for Sovics Images
 sovicImages_dir = root_dir / '../assets/sovicImages'
