@@ -1,5 +1,6 @@
 __*
 .env
+.avoidChannels
 temp.txt
 startBot.sh
 /assets
