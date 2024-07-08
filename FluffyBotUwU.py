@@ -52,7 +52,6 @@ async def updatePresence():
     	"Broken Hand",
     	"Windows Slave Name",
     	"UwU",
-    	"in {n} Servers".format(n=len(client.guilds)),
     	"Fibbin",
     	"Arch user BTW",
     	"Desk Puncher"
