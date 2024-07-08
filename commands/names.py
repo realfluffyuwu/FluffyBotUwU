@@ -6,13 +6,22 @@ from discord.ext import commands
 
 root_dir = pathlib.Path(__file__).parent
 
+# File that has all the Channel ID's to avoid reading from
+channels = root_dir / '../.avoidChannels'
+print(channels)
+avoidChannels = []
+with open(channels, 'r') as f:
+    for line in f:
+        avoidChannels.append(line.strip())
+
+print(avoidChannels)
+
 # Specific Folder for Sovics Images
 sovicImages_dir = root_dir / '../assets/sovicImages'
 sovicAlias = ['sovic', 'hunter', 'habibi']
 
 # All the Images for everyone else are here
 regularImages_dir = root_dir / '../assets'
-
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -33,6 +42,10 @@ class names(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, ctx: discord.message.Message):
         if ctx.author == self.client.user:
+            return
+        # To avoid reading from avoidChannels
+        # need to string it since the ID's are read from a file
+        if str(ctx.channel.id) in avoidChannels:
             return
 
         # To lower the whole message
