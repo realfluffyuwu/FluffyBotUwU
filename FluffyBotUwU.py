@@ -1,10 +1,18 @@
 import pathlib
 import os
 import discord
+import sys
 from dotenv import load_dotenv
 from discord.ext import tasks, commands
 load_dotenv()
-TOKEN = os.getenv('TOKEN')
+
+# Handle if we are in debug mode
+if len(sys.argv) > 1:
+    if sys.argv[1] == "debug":
+        print("Debug Mode Enabled")
+        TOKEN = os.getenv('DEBUG_TOKEN')
+else:
+    TOKEN = os.getenv('TOKEN')
 
 root_dir = pathlib.Path(__file__).parent
 command_dir = root_dir / 'commands'
