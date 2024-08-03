@@ -16,6 +16,9 @@ with open(root_dir / '../.avoidChannels', 'r') as f:
 sovicImages_dir = root_dir / '../assets/sovicImages'
 sovicAlias = ['sovic', 'hunter', 'habibi']
 
+disabledChannel = [1267464644281372713]
+
+
 # All the Images for everyone else are here
 regularImages_dir = root_dir / '../assets'
 intents = discord.Intents.default()
@@ -48,30 +51,31 @@ class names(commands.Cog):
         ctx.content = ctx.content.lower()
 
         # Fluffy
-        if ctx.content.find('fluffy') != -1:
-            await ctx.reply(file=discord.File('{regularImages_dir}/fluffy.png'.format(regularImages_dir=regularImages_dir)))
+        if not(ctx.channel.id in disabledChannel):
+            if ctx.content.find('fluffy') != -1:
+                await ctx.reply(file=discord.File('{regularImages_dir}/fluffy.png'.format(regularImages_dir=regularImages_dir)))
 
-        # Jordan
-        if ctx.content.find('jordan') != -1:
-            await ctx.reply(file=discord.File('{regularImages_dir}/jordan.png'.format(regularImages_dir=regularImages_dir)))
+            # Jordan
+            if ctx.content.find('jordan') != -1:
+                await ctx.reply(file=discord.File('{regularImages_dir}/jordan.png'.format(regularImages_dir=regularImages_dir)))
 
-        # Mitch
-        if ctx.content.find('mitch') != -1:
-            await ctx.reply(file=discord.File('{regularImages_dir}/mitch.png'.format(regularImages_dir=regularImages_dir)))
+            # Mitch
+            if ctx.content.find('mitch') != -1:
+                await ctx.reply(file=discord.File('{regularImages_dir}/mitch.png'.format(regularImages_dir=regularImages_dir)))
 
-        # Quin
-        if ctx.content.find('quin') != -1:
-            quinnumber = random.randrange(0, 2)
-            await ctx.reply(file=discord.File('{regularImages_dir}/quin{quinnumber}.png'.format(regularImages_dir=regularImages_dir,quinnumber=quinnumber)))
-        
-        # Sovic Images
-        for alias in sovicAlias:
-            if ctx.content.find(alias) != -1:
-                images = os.listdir(sovicImages_dir)
-                
-                randomImg = random.choice(images)
+            # Quin
+            if ctx.content.find('quin') != -1:
+                quinnumber = random.randrange(0, 2)
+                await ctx.reply(file=discord.File('{regularImages_dir}/quin{quinnumber}.png'.format(regularImages_dir=regularImages_dir,quinnumber=quinnumber)))
+            
+            # Sovic Images
+            for alias in sovicAlias:
+                if ctx.content.find(alias) != -1:
+                    images = os.listdir(sovicImages_dir)
+                    
+                    randomImg = random.choice(images)
 
-                await ctx.reply(file=discord.File('{sovicImages_dir}/{img}'.format(sovicImages_dir=sovicImages_dir, img=randomImg)))
+                    await ctx.reply(file=discord.File('{sovicImages_dir}/{img}'.format(sovicImages_dir=sovicImages_dir, img=randomImg)))
 
 async def setup(client):
     await client.add_cog(names(client))
