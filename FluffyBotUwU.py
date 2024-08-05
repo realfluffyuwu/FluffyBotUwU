@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 from discord.ext import tasks, commands
 load_dotenv()
 
+TOKEN = None
+
 # Handle if we are in debug mode
 if len(sys.argv) > 1:
     if sys.argv[1] == "debug":
@@ -13,6 +15,10 @@ if len(sys.argv) > 1:
         TOKEN = os.getenv('DEBUG_TOKEN')
 else:
     TOKEN = os.getenv('TOKEN')
+
+if TOKEN == None:
+    print("Error: No Token Found")
+    exit()
 
 root_dir = pathlib.Path(__file__).parent
 command_dir = root_dir / 'commands'
