@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import pathlib
 import os
 import discord
@@ -68,7 +70,9 @@ async def updatePresence():
     	"UwU",
     	"Fibbin",
     	"Arch user BTW",
-    	"Desk Puncher"
+    	"Desk Puncher",
+        "Put the Fries in",
+        "Multicam with the Miggers"
     ]
     
     global presenceIndex
